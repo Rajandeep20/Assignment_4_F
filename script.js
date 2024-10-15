@@ -1,4 +1,6 @@
-document.getElementById('surveyForm').addEventListener('submit', function(event) {
+document.getElementById('surveyForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
     let isValid = true;
 
     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
@@ -41,7 +43,37 @@ document.getElementById('surveyForm').addEventListener('submit', function(event)
         isValid = false;
     }
 
-    if (!isValid) {
-        event.preventDefault();
+    if (isValid) {
+        const formData = {
+            name: name,
+            source: source ? source.value : '',
+            features: Array.from(features).map(checkbox => checkbox.value),
+            experience: experience,
+            username: username,
+            customCode: customCode,
+            date: document.getElementById('date').value,
+            comments: document.getElementById('comments').value
+        };
+
+        fetch('https://httpbin.org/post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.json) {
+                    alert('Form submitted successfully! Your data has been recorded.');
+                    console.log('Server response:', data);
+                } else {
+                    alert('There was an error submitting the form. Please try again later.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to submit the form due to a network error. Please check your connection and try again.');
+            });
     }
 });
