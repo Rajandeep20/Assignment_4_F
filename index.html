@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Survey Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Interactive Survey Form</h1>
+        <form id="surveyForm" action="https://httpbin.org/post" method="POST">
+            <div class="field">
+                <!-- Form name field -->
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error-message" id="nameError"></span>
+            </div>
+            
+            <div class="field">
+                <!-- Form radio buttons -->
+                <fieldset>
+                    <legend>How did you hear about us?</legend>
+                    <label><input type="radio" name="source" value="Internet"> Internet</label>
+                    <label><input type="radio" name="source" value="Friend"> Friend</label>
+                    <label><input type="radio" name="source" value="Other"> Other</label>
+                    <span class="error-message" id="sourceError"></span>
+                </fieldset>
+            </div>
+
+            <div class="field">
+                <!-- Form checkbox -->
+                <fieldset>
+                    <legend>Which features are most important to you?</legend>
+                    <label><input type="checkbox" name="features" value="Design"> Design</label>
+                    <label><input type="checkbox" name="features" value="Functionality"> Functionality</label>
+                    <label><input type="checkbox" name="features" value="Support"> Support</label>
+                    <span class="error-message" id="featuresError"></span>
+                </fieldset>
+            </div>
+
+            <div class="field">
+                <!-- Form Dropdown Menu -->
+                <label for="experience">Rate your experience:</label>
+                <select id="experience" name="experience">
+                    <option value="">Select an option</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Average">Average</option>
+                    <option value="Poor">Poor</option>
+                </select>
+                <span class="error-message" id="experienceError"></span>
+            </div>
+
+            <div class="field">
+                <!-- Regex Validation Field (Username) -->
+                <label for="username">Username (alphanumeric only):</label>
+                <input type="text" id="username" name="username" pattern="^[a-zA-Z0-9]+$" required>
+                <span class="error-message" id="usernameError"></span>
+            </div>
+
+            <div class="field">
+                <!-- Custom Code Field -->
+                <label for="customCode">Custom Code (Format: ABC-1234):</label>
+                <input type="text" id="customCode" name="customCode" pattern="^[A-Z]{3}-\d{4}$" required>
+                <span class="error-message" id="customCodeError"></span>
+            </div>
+
+            <div class="field">
+                <!-- Additional Inputs -->
+                <label for="date">Select a date:</label>
+                <input type="date" id="date" name="date">
+                <span class="error-message" id="dateError"></span>
+            </div>
+            
+            <div class="field">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="4"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
